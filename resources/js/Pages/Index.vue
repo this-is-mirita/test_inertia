@@ -8,7 +8,11 @@
 
         <!-- Поиск -->
         <div class="mb-3">
-            <VInput label="Поиск" inputId="message" />
+            <VInput
+                v-model="searchInput"
+                @input="handleInputSearch"
+                label="Поиск"
+                inputId="message" />
         </div>
 
         <!-- Таблица -->
@@ -33,11 +37,22 @@ import {Link} from "@inertiajs/inertia-vue3";
         },
         data() {
             return {
-                // создали копию (локальную гпт поправил хз как это) в которую положили наш листс
+                //  копию в которую положили наш листс
                 localLists: [...this.lists],
+                searchInput: '',
             }
         },
         methods: {
+            handleInputSearch() {
+                const search = this.searchInput.toLowerCase();
+                const results = this.lists.filter(item => {
+                    return item.title.toLowerCase().includes(search);
+                });
+
+                console.log('Результаты поиска:', results);
+                return results; // или this.filteredLists = results
+
+            },
             deleteElement(id){
                 axios.post(`/delete/${id}`).then((response) => {
                     // удаляем элемент из копии созданно
@@ -49,5 +64,6 @@ import {Link} from "@inertiajs/inertia-vue3";
                 console.log("editElement" , id);
             },
         },
+
     }
 </script>
