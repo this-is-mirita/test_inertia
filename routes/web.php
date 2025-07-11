@@ -8,5 +8,6 @@ Route::get('/create', [IndexController::class, 'create']);
 Route::post('/create', [IndexController::class, 'store']);
 
 
+
 Route::post('/create', [IndexController::class, 'store']);
 
