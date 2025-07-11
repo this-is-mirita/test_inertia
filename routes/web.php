@@ -9,5 +9,6 @@ Route::post('/create', [IndexController::class, 'store']);
 
 
 
+
 Route::post('/create', [IndexController::class, 'store']);
 
